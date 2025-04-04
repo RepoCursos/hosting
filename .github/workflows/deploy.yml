@@ -35,6 +35,10 @@ jobs:
         php artisan route:cache
         php artisan view:cache
 
+    - name: Configurar el archivo .env
+      run: |
+        cp .env.example .env        
+
     - name: Subir al servidor via FTP
       uses: SamKirkland/FTP-Deploy-Action@4.0.0
       with:
@@ -43,8 +47,7 @@ jobs:
         password: ${{ secrets.FTP_PASSWORD }}
         server-dir: ${{ secrets.FTP_DESTINATION }}
     
-    - name: Configurar el archivo .env y comandos de Laravel post-deployment
+    - name: Configurar Laravel post-deployment
       run: |
-        cp .env.example .env
         php artisan key:generate
         php artisan migrate --force
