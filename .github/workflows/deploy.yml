@@ -25,11 +25,6 @@ jobs:
     - name: Instalar dependencias de Composer
       run: composer install --no-dev --optimize-autoloader
 
-    - name: Build assets
-      run: |
-        npm install
-        npm run prod
-
     - name: Cambiar permisos de storage y bootstrap/cache
       run: |
         chmod -R 775 storage bootstrap/cache
