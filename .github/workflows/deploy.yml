@@ -25,13 +25,6 @@ jobs:
     - name: Instalar dependencias de Composer
       run: composer install --no-dev --optimize-autoloader
 
-    - name: Configurar el archivo .env y comandos de Laravel post-deployment
-      run: |
-        cp .env.example .env
-        php artisan key:generate
-        php artisan migrate --force
-        # php artisan db:seed --force
-
     - name: Build assets
       run: |
         npm install
@@ -54,3 +47,9 @@ jobs:
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
         server-dir: ${{ secrets.FTP_DESTINATION }}
+    
+    - name: Configurar el archivo .env y comandos de Laravel post-deployment
+      run: |
+        cp .env.example .env
+        php artisan key:generate
+        php artisan migrate --force
