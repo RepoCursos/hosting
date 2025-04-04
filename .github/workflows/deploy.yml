@@ -37,7 +37,8 @@ jobs:
 
     - name: Configurar el archivo .env
       run: |
-        cp .env.example .env        
+        cp .env.example .env   
+        php artisan key:generate     
 
     - name: Subir al servidor via FTP
       uses: SamKirkland/FTP-Deploy-Action@4.0.0
@@ -49,5 +50,4 @@ jobs:
     
     - name: Configurar Laravel post-deployment
       run: |
-        php artisan key:generate
         php artisan migrate --force
